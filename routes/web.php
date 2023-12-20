@@ -1,25 +1,23 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Front\AboutController;
+use App\Http\Controllers\Front\ContactController;
+use App\Http\Controllers\Front\HomeController;
+
 use Illuminate\Support\Facades\Route;
 
+require_once "admin.php";
 
-Route::get('/', function () {
-    return view('front.homepage');
-});
+//Route::get('/{lang}', function ($lang) {
+//    App::setLocale($lang);
+//    return view('front.homepage');
+//});
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('admin.dashboard');
+Route::get('/', [HomeController::class, 'index'])->name('homepage');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
-//Route::get('/admin/dashboard', function () {
-//    return view('admin.dashboard');
-//})->middleware(['auth', 'verified'])->name('admin.dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-require __DIR__.'/auth.php';
+
+
