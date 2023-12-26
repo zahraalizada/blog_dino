@@ -35,13 +35,12 @@
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4"
                                         href="{{route('contact')}}">@lang('menu.contact')</a></li>
 
+
                 <li class="nav-item d-flex">
-                        <a
-                            class="nav-link px-lg-1 py-3 py-lg-4 @if(App::isLocale('az')) text-warning  @endif"
-                            href="#">AZ</a>
-                        <a
-                            class="nav-link px-lg-1 py-3 py-lg-4 @if(App::isLocale('en')) text-warning @endif"
-                            href="#">EN</a>
+                    <a href="{{ route('change.language', ['locale' => 'en']) }}" class="nav-link px-lg-1 py-3 py-lg-4 @if(App::isLocale('en')) text-warning  @endif">En </a>
+                    <a href="{{ route('change.language', ['locale' => 'az']) }}" class="nav-link px-lg-1 py-3 py-lg-4 @if(App::isLocale('az')) text-warning  @endif">Az </a>
+
+
                 </li>
             </ul>
         </div>

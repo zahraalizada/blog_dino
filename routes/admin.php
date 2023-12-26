@@ -1,28 +1,27 @@
 <?php
 
-
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\ProfileController;
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('admin.dashboard');
+
+use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['middleware' => ['setlocale'], 'prefix' => '{locale?}'], function () {
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/login',[AuthController::class,'login'])->name('login');
-        Route::post('/getlogin',[AuthController::class,'getlogin'])->name('getlogin');
-        Route::get('/register',[AuthController::class,'register'])->name('register');
-        Route::post('/getregister',[AuthController::class,'getregister'])->name('getregister');
-        Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
 
-        Route::group(['middleware' => ['admin']],function (){
-            Route::get('dashboard', [Dashboard::class, 'index'])->name('dashboard');
-            Route::resource('questanswer', QuestAnswerController::class);
-        });
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('about', AboutController::class);
+    Route::resource('contact', ContactController::class);
+    Route::resource('setting', SettingController::class);
+    Route::resource('post', PostController::class);
+    Route::resource('category', CategoryController::class);
 
-    });
 
 });
 
