@@ -38,10 +38,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new CategoryTranslation();
-        $category->fill($request->all());
-        $category->save();
-
+        Category::create($request->except('_token'));
         return redirect()->route('posts.index');
     }
 

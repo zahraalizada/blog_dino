@@ -32,13 +32,13 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="input-group mt-3">
                                     <label for=""></label>
-                                    <input type="text" name="az[title]" class="form-control bg-light small rounded"
+                                    <input type="text" name="name:az" class="form-control bg-light small rounded"
                                            placeholder="...">
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="input-group mt-3">
-                                    <input type="text" name="en[title]" class="form-control bg-light small rounded" placeholder="...">
+                                    <input type="text" name="name:en" class="form-control bg-light small rounded" placeholder="...">
                                 </div>
 
                             </div>
