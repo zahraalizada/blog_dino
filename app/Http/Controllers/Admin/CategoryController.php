@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\CategoryTranslation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class CategoryController extends Controller
 {
@@ -16,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        $categories = Category::get();
+        return view('admin.category.index', compact('categories'));
 
     }
 
@@ -39,7 +41,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         Category::create($request->except('_token'));
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -61,7 +63,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -73,7 +76,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+
+        if (!$category) {
+            return redirect()->route('admin.category.index')->with('error', 'Category not found.');
+        }
+
+        $category->update($request->except('_token'));
+        return redirect()->route('admin.category.index')->with('success', 'Category update.');
     }
 
     /**
@@ -84,6 +94,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return redirect()->route('admin.category.index')->with('success', 'Category delete.');
+
+
     }
 }

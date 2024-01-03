@@ -16,7 +16,15 @@ class Category extends Model implements TranslatableContract
     public $translatedAttributes  = ['name','slug'];
 
 
-
-
+    public function translations(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CategoryTranslation::class, 'category_id');
+    }
 
 }
+
+
+
+
+
+
