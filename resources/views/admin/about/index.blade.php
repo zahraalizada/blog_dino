@@ -7,7 +7,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="#" class="btn btn-primary btn-icon-split">
+            <a href="{{route('admin.about.create')}}" class="btn btn-primary btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-plus"></i>
                                         </span>
@@ -19,23 +19,20 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Description</th>
+                        <th>Paragraph</th>
                         <th>Image</th>
                         <th class="text-right" width="150px">Action</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
-                        <th>Title</th>
-                        <th>Description</th>
+                        <th>Paragraph</th>
                         <th>Image</th>
                         <th class="text-right">Action</th>
                     </tr>
                     </tfoot>
                     <tbody>
                     <tr>
-                        <td>Title 1</td>
                         <td>Description 1</td>
                         <td>Image 1</td>
                         <td class="text-right">

@@ -1,19 +1,25 @@
 @extends('admin.layouts.layout')
-@section('title','New Category')
+@section('title','New About')
 
 
 @section('content')
 
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header">
-            Add new Category
+            Add new About info
         </div>
+
         <div class="card-body">
             <div class="row">
                 <div class="col-sm">
-                    <form class="w-100"  method="post" action="{{route('admin.category.store')}}" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                       @csrf
+                    <form class="w-100" method="post" action="{{route('admin.about.store')}}" enctype="multipart/form-data"
+                          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        @csrf
+                        <div class="custom-file mb-3">
+                            <input type="file" name="image" class="custom-file-input" id="customFileLang" lang="es">
+                            <label class="custom-file-label" for="customFileLang">Select Image</label>
+                        </div>
+
                         <ul class="nav nav-tabs  " id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home"
@@ -30,19 +36,22 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="input-group mt-3">
-                                    <label for=""></label>
-                                    <input type="text" name="name:az" class="form-control bg-light small rounded"
-                                           placeholder="...">
+                                <div class="form-group mt-3">
+                                    <label for="paragraph_az">Add paragraph (AZE)</label>
+                                    <textarea class="form-control" name="paragraph:az" id="paragraph_az"
+                                              rows="3"></textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="input-group mt-3">
-                                    <input type="text" name="name:en" class="form-control bg-light small rounded" placeholder="...">
+                                <div class="form-group mt-3">
+                                    <label for="paragraph_en">Add paragraph (EN)</label>
+                                    <textarea class="form-control" name="paragraph:en" id="paragraph_en"
+                                              rows="3"></textarea>
                                 </div>
 
                             </div>
                         </div>
+
 
                         <div class="input-group mt-3">
                             <div class="input-group-append ">
@@ -57,8 +66,13 @@
                 </div>
 
             </div>
+            <hr>
+
 
         </div>
     </div>
+    <!-- DataTales Example -->
 
 @endsection
+
+
