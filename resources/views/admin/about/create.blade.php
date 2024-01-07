@@ -12,12 +12,16 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm">
-                    <form class="w-100" method="post" action="{{route('admin.about.store')}}" enctype="multipart/form-data"
+                    <form class="w-100" method="post" action="{{route('admin.about.store')}}"
+                          enctype="multipart/form-data"
                           class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         @csrf
-                        <div class="custom-file mb-3">
-                            <input type="file" name="image" class="custom-file-input" id="customFileLang" lang="es">
-                            <label class="custom-file-label" for="customFileLang">Select Image</label>
+                        {{--                        <div class="custom-file mb-3">--}}
+                        {{--                            <input type="file" name="image" class="custom-file-input" id="customFileLang" lang="es">--}}
+                        {{--                            <label class="custom-file-label" for="customFileLang">Select Image</label>--}}
+                        {{--                        </div>--}}
+                        <div class=" mb-3">
+                            <input type="file" name="image" class=" ">
                         </div>
 
                         <ul class="nav nav-tabs  " id="myTab" role="tablist">
@@ -32,8 +36,8 @@
                                         role="tab" aria-controls="profile" aria-selected="false">ENG
                                 </button>
                             </li>
-
                         </ul>
+
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="form-group mt-3">

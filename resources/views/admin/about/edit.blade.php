@@ -12,9 +12,18 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-12">
-                    <form method="post" action="{{route('admin.about.update',['about' => $about->id])}}" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form method="post" action="{{route('admin.about.update',['about' => $about->id])}}"
+                          class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                          enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+
+                        <div class="mb-1">
+                            <img src="{{asset('uploads/thumbnails/' . $about->image)}}" alt="">
+                        </div>
+                        <div class=" mb-3">
+                            <input type="file" name="image" class=" ">
+                        </div>
 
                         <ul class="nav nav-tabs  " id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -33,13 +42,14 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="input-group mt-3">
                                     <label for=""></label>
-                                    <input type="text" name="name:az" class="form-control bg-light small rounded"
-                                           placeholder="..." value="{{ $about->translate('az')->name }}">
+                                    <input type="text" name="paragraph:az" class="form-control bg-light small rounded"
+                                           placeholder="..." value="{{ $about->translate('az')->paragraph }}">
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <div class="input-group mt-3">
-                                    <input type="text" name="name:en" class="form-control bg-light small rounded" placeholder="..." value="{{ $about->translate('en')->name }}">
+                                    <input type="text" name="paragraph:en" class="form-control bg-light small rounded"
+                                           placeholder="..." value="{{ $about->translate('en')->paragraph }}">
                                 </div>
 
                             </div>

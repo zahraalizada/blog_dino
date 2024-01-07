@@ -32,19 +32,32 @@
                     </tr>
                     </tfoot>
                     <tbody>
-                    <tr>
-                        <td>Description 1</td>
-                        <td>Image 1</td>
-                        <td class="text-right">
-                            <a href="#" class="btn btn-info btn-circle btn-sm">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                    @foreach($abouts as $about)
+                        <tr>
+                            <td>{{$about->paragraph}}</td>
+                            <td>
+                                <div>
+                                    <img src="{{ asset('uploads/thumbnails/' . $about->image) }}" >
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <a href="{{route('admin.about.edit',['about' => $about->id])}}" class="btn btn-info btn-circle btn-sm mr-1">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                    <form method="post"
+                                          action="{{ route('admin.about.destroy', ['about' => $about->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
 
-                        </td>
-                    </tr>
+
+                            </td>
+                        </tr>
+                    @endforeach
+
 
                     </tbody>
 

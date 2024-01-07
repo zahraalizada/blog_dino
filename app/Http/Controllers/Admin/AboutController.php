@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\About;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+
 
 class AboutController extends Controller
 {
@@ -14,7 +17,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-        return view('admin.about.index');
+        $abouts = About::get();
+        return view('admin.about.index', compact('abouts'));
     }
 
     /**
@@ -31,15 +35,22 @@ class AboutController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
+        $data = $request->except('_token');
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            dd($image);
+            $imageName = $image->hashName();;
+            ImageManager::gd()->read($image)->cover(150,150)->save(public_path('uploads/thumbnails/'.$imageName));
+            ImageManager::gd()->read($image)->save(public_path('uploads/'.$imageName));
+            $data['image'] = $imageName;
+
         }
-        return "resim yok";
+        About::create($data);
+        return redirect()->route('admin.about.index');
 
     }
 
@@ -62,7 +73,8 @@ class AboutController extends Controller
      */
     public function edit($id)
     {
-        //
+        $about = About::find($id);
+        return view('admin.about.edit', compact('about'));
     }
 
     /**
@@ -74,7 +86,22 @@ class AboutController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $about = About::find($id);
+        $data = $request->except('_token');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = $image->hashName();;
+            ImageManager::gd()->read($image)->cover(150,150)->save(public_path('uploads/thumbnails/'.$imageName));
+            ImageManager::gd()->read($image)->save(public_path('uploads/'.$imageName));
+            $data['image'] = $imageName;
+        }
+        else{
+            $data['image'] = $about->image;
+        }
+
+        $about->update($data);
+        return redirect()->route('admin.about.index');
     }
 
     /**
@@ -85,6 +112,9 @@ class AboutController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $about = About::find($id);
+        $about->delete();
+        return redirect()->route('admin.about.index')->with('success', 'About item delete.');
+
     }
 }
