@@ -52,8 +52,6 @@
                                         <button type="submit" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </div>
-
-
                             </td>
                         </tr>
                     @endforeach

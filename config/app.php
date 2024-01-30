@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 
+//         Ckeditor\CkeditorServiceProvider::class,
+
     ],
 
     /*
@@ -193,6 +195,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
+
+//        'Ckeditor' => Ckeditor\Facades\Ckeditor::class,
     ])->toArray(),
 
 ];

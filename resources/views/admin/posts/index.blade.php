@@ -7,7 +7,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="#" class="btn btn-primary btn-icon-split">
+            <a href="{{route('admin.post.create')}}" class="btn btn-primary btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-plus"></i>
                                         </span>
@@ -20,48 +20,61 @@
                     <thead>
                     <tr>
                         <th>Main Title</th>
-                        <th>Subtitle</th>
-                        <th>Description</th>
-                        <th>Image</th>
-
                         <th>Secondary Title</th>
+                        <th>Author</th>
                         <th>Paragraph</th>
-
+                        <th>Title Image</th>
+                        <th>Image</th>
                         <th class="text-right" width="150px">Action</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>Main Title</th>
-                        <th>Subtitle</th>
-                        <th>Description</th>
-                        <th>Image</th>
-
                         <th>Secondary Title</th>
+                        <th>Author</th>
                         <th>Paragraph</th>
+                        <th>Title Image</th>
+                        <th>Image</th>
                         <th class="text-right">Action</th>
                     </tr>
                     </tfoot>
                     <tbody>
-                    <tr>
-                        <td>Main Title</td>
-                        <td>Subtitle</td>
-                        <td>Description</td>
-                        <td>Image</td>
+                    @foreach($posts as $post)
+                        <tr>
+                            <td>{{$post->main_title}}</td>
+                            <td>{{$post->secondary_title}}</td>
+                            <td>{{$post->author}}</td>
+                            <td>{{$post->paragraph}}</td>
+                            <td>
+                                <div>
+                                    <img src="{{ asset('uploads/thumbnails/' . $post->title_image) }}" >
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <img src="{{ asset('uploads/thumbnails/' . $post->image) }}" >
+                                </div>
+                            </td>
 
-                        <td>Secondary Title</td>
-                        <td>Paragraph</td>
-                        <td class="text-right">
-                            <a href="#" class="btn btn-info btn-circle btn-sm">
-                                <i class="fas fa-pen"></i>
-                            </a>
-                            <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                <i class="fas fa-trash"></i>
-                            </a>
+                            <td class="text-right">
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <a href="{{route('admin.post.edit',['post' => $post->id])}}" class="btn btn-info btn-circle btn-sm mr-1">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                    <form method="post"
+                                          action="{{ route('admin.post.destroy', ['post' => $post->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
+                            </td>
 
-                        </td>
-                    </tr>
 
+                        </tr>
+
+                    @endforeach
                     </tbody>
 
                 </table>

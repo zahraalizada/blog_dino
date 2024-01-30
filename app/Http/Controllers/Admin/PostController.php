@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
 
 class PostController extends Controller
 {
@@ -14,8 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index');
-
+        $posts = Post::get();
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -25,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -36,7 +37,27 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request);
+        $data = $request->except('_token');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = $image->hashName();;
+            ImageManager::gd()->read($image)->cover(150,150)->save(public_path('uploads/thumbnails/'.$imageName));
+            ImageManager::gd()->read($image)->save(public_path('uploads/'.$imageName));
+            $data['image'] = $imageName;
+        }
+        if ($request->hasFile('title_image')) {
+            $image = $request->file('title_image');
+            $imageName = $image->hashName();;
+            ImageManager::gd()->read($image)->cover(150,150)->save(public_path('uploads/thumbnails/'.$imageName));
+            ImageManager::gd()->read($image)->save(public_path('uploads/'.$imageName));
+            $data['title_image'] = $imageName;
+        }
+
+
+        Post::create($data);
+        return redirect()->route('admin.post.index');
     }
 
     /**
@@ -58,7 +79,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**

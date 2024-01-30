@@ -49,6 +49,7 @@ class AboutController extends Controller
             $data['image'] = $imageName;
 
         }
+
         About::create($data);
         return redirect()->route('admin.about.index');
 
