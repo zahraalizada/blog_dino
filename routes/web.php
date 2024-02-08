@@ -16,7 +16,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware'=>'lang']
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 });
 
-
 Route::get('change-language/{locale}', [LanguageController::class, 'changeLanguage'])->name('change.language');
 
 
